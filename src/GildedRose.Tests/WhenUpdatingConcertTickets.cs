@@ -1,13 +1,12 @@
 ﻿using GildedRose.Console;
 using GildedRose.Console.Handlers;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace GildedRose.Tests
 {
-    [TestClass]
     public class WhenUpdatingConcertTickets
     {
-        [TestMethod]
+        [Fact]
         public void UpdateTicketsBeforeSellIn()
         {
             var item = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 15, Quality = 20 };
@@ -15,11 +14,11 @@ namespace GildedRose.Tests
             var handler = new UpdateItemCommandHandler();
             item = handler.Handle(command);
 
-            Assert.AreEqual(14, item.SellIn);
-            Assert.AreEqual(21, item.Quality);
+            Assert.Equal(14, item.SellIn);
+            Assert.Equal(21, item.Quality);
         }
 
-        [TestMethod]
+        [Fact]
         public void UpdateTicketsTenDaysBeforeSellIn()
         {
             var item = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 10, Quality = 25 };
@@ -27,11 +26,11 @@ namespace GildedRose.Tests
             var handler = new UpdateItemCommandHandler();
             item = handler.Handle(command);
 
-            Assert.AreEqual(9, item.SellIn);
-            Assert.AreEqual(27, item.Quality);
+            Assert.Equal(9, item.SellIn);
+            Assert.Equal(27, item.Quality);
         }
 
-        [TestMethod]
+        [Fact]
         public void UpdateTicketsFiveDaysBeforeSellIn()
         {
             var item = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 5, Quality = 35 };
@@ -39,11 +38,11 @@ namespace GildedRose.Tests
             var handler = new UpdateItemCommandHandler();
             item = handler.Handle(command);
 
-            Assert.AreEqual(4, item.SellIn);
-            Assert.AreEqual(38, item.Quality);
+            Assert.Equal(4, item.SellIn);
+            Assert.Equal(38, item.Quality);
         }
 
-        [TestMethod]
+        [Fact]
         public void UpdateTicketsAfterSellIn()
         {
             var item = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 0, Quality = 50 };
@@ -51,8 +50,8 @@ namespace GildedRose.Tests
             var handler = new UpdateItemCommandHandler();
             item = handler.Handle(command);
 
-            Assert.AreEqual(-1, item.SellIn);
-            Assert.AreEqual(0, item.Quality);
+            Assert.Equal(-1, item.SellIn);
+            Assert.Equal(0, item.Quality);
         }
     }
 }

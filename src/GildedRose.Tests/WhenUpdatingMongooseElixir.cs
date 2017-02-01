@@ -1,13 +1,12 @@
 ﻿using GildedRose.Console;
 using GildedRose.Console.Handlers;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace GildedRose.Tests
 {
-    [TestClass]
     public class WhenUpdatingMongooseElixir
     {
-        [TestMethod]
+        [Fact]
         public void UpdateElixirBeforeSellIn()
         {
             var item = new Item { Name = "Elixir of the Mongoose", SellIn = 5, Quality = 7 };
@@ -15,8 +14,8 @@ namespace GildedRose.Tests
             var handler = new UpdateItemCommandHandler();
             item = handler.Handle(command);
 
-            Assert.AreEqual(4, item.SellIn);
-            Assert.AreEqual(6, item.Quality);
+            Assert.Equal(4, item.SellIn);
+            Assert.Equal(6, item.Quality);
         }
     }
 }

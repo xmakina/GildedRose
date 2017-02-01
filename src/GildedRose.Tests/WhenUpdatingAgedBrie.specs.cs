@@ -1,14 +1,12 @@
-﻿using System;
-using GildedRose.Console;
+﻿using GildedRose.Console;
 using GildedRose.Console.Handlers;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace GildedRose.Tests
 {
-    [TestClass]
     public class WhenUpdatingAgedBrie
     {
-        [TestMethod]
+        [Fact]
         public void UpdateAgedBrieBeforeSellIn()
         {
             var agedBrie = new Item {Name = "Aged Brie", SellIn = 2, Quality = 0};
@@ -16,11 +14,11 @@ namespace GildedRose.Tests
             var handler = new UpdateItemCommandHandler();
             agedBrie = handler.Handle(command);
 
-            Assert.AreEqual(1, agedBrie.Quality);
-            Assert.AreEqual(1, agedBrie.SellIn);
+            Assert.Equal(1, agedBrie.Quality);
+            Assert.Equal(1, agedBrie.SellIn);
         }
 
-        [TestMethod]
+        [Fact]
         public void UpdateAgedBrieAfterSellIn()
         {
             var agedBrie = new Item { Name = "Aged Brie", SellIn = 0, Quality = 2 };
@@ -28,11 +26,11 @@ namespace GildedRose.Tests
             var handler = new UpdateItemCommandHandler();
             agedBrie = handler.Handle(command);
 
-            Assert.AreEqual(4, agedBrie.Quality);
-            Assert.AreEqual(-1, agedBrie.SellIn);
+            Assert.Equal(4, agedBrie.Quality);
+            Assert.Equal(-1, agedBrie.SellIn);
         }
 
-        [TestMethod]
+        [Fact]
         public void UpdateAgedBrieAtMaxQuality()
         {
             var agedBrie = new Item { Name = "Aged Brie", SellIn = -24, Quality = 50 };
@@ -40,8 +38,8 @@ namespace GildedRose.Tests
             var handler = new UpdateItemCommandHandler();
             agedBrie = handler.Handle(command);
 
-            Assert.AreEqual(50, agedBrie.Quality);
-            Assert.AreEqual(-25, agedBrie.SellIn);
+            Assert.Equal(50, agedBrie.Quality);
+            Assert.Equal(-25, agedBrie.SellIn);
         }
     }
 }

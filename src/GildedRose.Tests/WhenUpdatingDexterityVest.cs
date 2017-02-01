@@ -1,13 +1,12 @@
 using GildedRose.Console;
 using GildedRose.Console.Handlers;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace GildedRose.Tests
 {
-    [TestClass]
     public class WhenUpdatingDexterityVest
     {
-        [TestMethod]
+        [Fact]
         public void UpdateVestBeforeSellIn()
         {
             var item = new Item { Name = "+5 Dexterity Vest", SellIn = 10, Quality = 20 };
@@ -15,11 +14,11 @@ namespace GildedRose.Tests
             var handler = new UpdateItemCommandHandler();
             item = handler.Handle(command);
 
-            Assert.AreEqual(9, item.SellIn);
-            Assert.AreEqual(19, item.Quality);
+            Assert.Equal(9, item.SellIn);
+            Assert.Equal(19, item.Quality);
         }
 
-        [TestMethod]
+        [Fact]
         public void UpdateVestAfterSellIn()
         {
             var item = new Item { Name = "+5 Dexterity Vest", SellIn = 0, Quality = 10 };
@@ -27,11 +26,11 @@ namespace GildedRose.Tests
             var handler = new UpdateItemCommandHandler();
             item = handler.Handle(command);
 
-            Assert.AreEqual(-1, item.SellIn);
-            Assert.AreEqual(8, item.Quality);
+            Assert.Equal(-1, item.SellIn);
+            Assert.Equal(8, item.Quality);
         }
 
-        [TestMethod]
+        [Fact]
         public void UpdateVestAfterNoQuality()
         {
             var item = new Item { Name = "+5 Dexterity Vest", SellIn = -5, Quality = 0 };
@@ -39,8 +38,8 @@ namespace GildedRose.Tests
             var handler = new UpdateItemCommandHandler();
             item = handler.Handle(command);
 
-            Assert.AreEqual(-6, item.SellIn);
-            Assert.AreEqual(0, item.Quality);
+            Assert.Equal(-6, item.SellIn);
+            Assert.Equal(0, item.Quality);
         }
     }
 }

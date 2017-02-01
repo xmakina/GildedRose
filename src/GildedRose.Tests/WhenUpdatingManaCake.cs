@@ -1,13 +1,12 @@
 ﻿using GildedRose.Console;
 using GildedRose.Console.Handlers;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace GildedRose.Tests
 {
-    [TestClass]
     public class WhenUpdatingManaCake
     {
-        [TestMethod]
+        [Fact]
         public void UpdateManaCakeBeforeSellIn()
         {
             var item = new Item { Name = "Conjured Mana Cake", SellIn = 3, Quality = 6 };
@@ -15,8 +14,8 @@ namespace GildedRose.Tests
             var handler = new UpdateItemCommandHandler();
             item = handler.Handle(command);
 
-            Assert.AreEqual(2, item.SellIn);
-            Assert.AreEqual(5, item.Quality);
+            Assert.Equal(2, item.SellIn);
+            Assert.Equal(5, item.Quality);
         }
     }
 }
