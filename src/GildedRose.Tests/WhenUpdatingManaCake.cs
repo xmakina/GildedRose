@@ -15,7 +15,7 @@ namespace GildedRose.Tests
             item = handler.Handle(command);
 
             Assert.Equal(2, item.SellIn);
-            Assert.Equal(5, item.Quality);
+            Assert.Equal(4, item.Quality);
         }
     }
 }

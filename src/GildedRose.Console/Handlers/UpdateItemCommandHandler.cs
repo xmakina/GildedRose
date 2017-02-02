@@ -29,8 +29,25 @@ namespace GildedRose.Console.Handlers
                 }
             }
 
-            if (item.Name == "+5 Dexterity Vest" || item.Name == "Elixir of the Mongoose" || item.Name == "Conjured Mana Cake")
+            if (item.Name == "+5 Dexterity Vest" || item.Name == "Elixir of the Mongoose")
             {
+                item.Quality--;
+                item.SellIn--;
+
+                if (item.SellIn < 0)
+                {
+                    item.Quality--;
+                }
+
+                if (item.Quality < 0)
+                {
+                    item.Quality = 0;
+                }
+            }
+
+            if (item.Name == "Conjured Mana Cake")
+            {
+                item.Quality--;
                 item.Quality--;
                 item.SellIn--;
 
@@ -63,6 +80,11 @@ namespace GildedRose.Console.Handlers
                 if (item.SellIn < 0)
                 {
                     item.Quality = 0;
+                }
+
+                if (item.Quality > 50)
+                {
+                    item.Quality = 50;
                 }
             }
 
